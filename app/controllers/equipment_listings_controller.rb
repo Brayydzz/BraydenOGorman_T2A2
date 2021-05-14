@@ -4,7 +4,7 @@ class EquipmentListingsController < ApplicationController
     before_action :set_condition_item_type, only: [:new, :edit, :create, :update]
 
     def index
-
+        @equimpent_listings = EquipmentListing.all
     end
 
     def show

@@ -24,5 +24,3 @@ shoes = ItemType.create(name: "Shoes")
 
 cond_used = Condition.create(name: 'Used')
 cond_new = Condition.create(name: "New")
-
-fake_address = Address.create(unit_num: " ", street_num: "123", street: "Fake Street", suburb: "Springfield", postcode: "0001")

@@ -1,3 +1,25 @@
 <h1>EQUIPMENT LISTINGS</h1>
 
 <p> <%= link_to "Create New Listing", new_equipment_listing_path %> </p>
+
+<div>
+    <table>
+        <tr>
+            <th>Listing Owner</th>
+            <th>Category</th>
+            <th>Condition</th>
+            <th>Price</th>
+            <th>Address</th>
+
+        </tr>
+        <% @equimpent_listings.each do |listing| %>
+            <tr>
+                <td><%= listing.user.name %></td>
+                <td><%= listing.item_type.name %></td>
+                <td><%= listing.condition.name %></td>
+                <td> $<%= listing.price %> </td>
+                <td> <%= listing.address %> </td>
+            </tr>
+        <% end %>
+    </table>
+</div>

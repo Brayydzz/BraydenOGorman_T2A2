@@ -6,9 +6,8 @@ class CreateEquipmentListings < ActiveRecord::Migration[6.1]
       t.string :title
       t.float :price
       t.text :description
+      t.string :address
       t.references :condition, null: false, foreign_key: true
-      t.references :address, null: false, foreign_key: true
-
       t.timestamps
     end
   end

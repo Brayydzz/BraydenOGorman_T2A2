@@ -15,16 +15,6 @@ ActiveRecord::Schema.define(version: 2021_05_14_004819) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "addresses", force: :cascade do |t|
-    t.string "unit_num"
-    t.string "street_num"
-    t.string "street"
-    t.string "suburb"
-    t.string "postcode"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "conditions", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -37,11 +27,10 @@ ActiveRecord::Schema.define(version: 2021_05_14_004819) do
     t.string "title"
     t.float "price"
     t.text "description"
+    t.string "address"
     t.bigint "condition_id", null: false
-    t.bigint "address_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["address_id"], name: "index_equipment_listings_on_address_id"
     t.index ["condition_id"], name: "index_equipment_listings_on_condition_id"
     t.index ["item_type_id"], name: "index_equipment_listings_on_item_type_id"
     t.index ["user_id"], name: "index_equipment_listings_on_user_id"
@@ -67,7 +56,6 @@ ActiveRecord::Schema.define(version: 2021_05_14_004819) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "equipment_listings", "addresses"
   add_foreign_key "equipment_listings", "conditions"
   add_foreign_key "equipment_listings", "item_types"
   add_foreign_key "equipment_listings", "users"
