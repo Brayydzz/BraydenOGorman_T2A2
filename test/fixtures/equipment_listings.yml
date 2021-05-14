@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  item_type: one
+  title: MyString
+  price: 1.5
+  description: MyText
+  condition: one
+  address: one
+
+two:
+  user: two
+  item_type: two
+  title: MyString
+  price: 1.5
+  description: MyText
+  condition: two
+  address: two

@@ -11,6 +11,38 @@
   </head>
 
   <body>
+    <header>
+      <nav class='navbar'>
+        <figure>
+          <img src="http://via.placeholder.com/80" alt="The Pro Shop logo">
+        </figure>
+        |
+        <ul>
+          <li>
+            <%= link_to "Home", root_path %>
+          </li>
+          |
+          <li>
+            <%= link_to "Equipment", equipment_listings_path %>
+          </li>
+          |
+          <li>
+            <%= link_to "Services", root_path %>
+          </li>
+          |
+          <li class='login'>
+            <% if user_signed_in? %>
+              <%= current_user.name %>
+              
+              <%= link_to "(Sign out)", destroy_user_session_path, method: :delete %>
+            <% else %>
+              <%= link_to "login/signup", new_user_session_path %>
+            <% end %>
+          </li>
+          |
+        </ul>
+      </nav>
+    </header>
     <% if notice %>
       <p class="notice"><%= notice %></p>
     <% end %>
