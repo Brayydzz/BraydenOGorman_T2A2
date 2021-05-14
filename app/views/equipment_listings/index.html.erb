@@ -6,19 +6,26 @@
     <table>
         <tr>
             <th>Listing Owner</th>
+            <th>Title</th>
             <th>Category</th>
             <th>Condition</th>
             <th>Price</th>
             <th>Address</th>
 
         </tr>
-        <% @equimpent_listings.each do |listing| %>
+        <% @equipment_listings.each do |listing| %>
             <tr>
                 <td><%= listing.user.name %></td>
+                <td> <%= link_to listing.title, equipment_listing_path(listing)%> </td>
                 <td><%= listing.item_type.name %></td>
                 <td><%= listing.condition.name %></td>
                 <td> $<%= listing.price %> </td>
                 <td> <%= listing.address %> </td>
+                <td>
+                    <%= link_to "Edit", edit_equipment_listing_path(listing) %>
+                |
+                    <%= link_to "Delete", listing, method: :delete, data: {confirm: "Are you sure" } %>
+                </td>
             </tr>
         <% end %>
     </table>

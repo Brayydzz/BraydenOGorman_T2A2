@@ -1,2 +1,10 @@
 <h1>SHOW LISTING</h1>
 
+<h2><%= @equipment_listing.title %></h2>
+<p>Category: <%= @equipment_listing.item_type.name %> </p>
+<p>Condition: <%= @equipment_listing.condition.name %> </p>
+<p>Description: <%= @equipment_listing.description %> </p>
+<p>Price: <%= @equipment_listing.price %> </p>
+<p>Location: <%= @equipment_listing.address %> </p>
+
+<p> <%= link_to "Back", equipment_listings_path %> </p>

@@ -4,7 +4,7 @@ class EquipmentListingsController < ApplicationController
     before_action :set_condition_item_type, only: [:new, :edit, :create, :update]
 
     def index
-        @equimpent_listings = EquipmentListing.all
+        @equipment_listings = EquipmentListing.all
     end
 
     def show
@@ -12,18 +12,36 @@ class EquipmentListingsController < ApplicationController
     end
 
     def new
-        @equimpent_listing = EquipmentListing.new
+        @equipment_listing = EquipmentListing.new
     end
 
     def create
-        @equimpent_listing = EquipmentListing.new(equipment_params)
-        if @equimpent_listing.save
+        @equipment_listing = EquipmentListing.new(equipment_params)
+        if @equipment_listing.save
             redirect_to @equipment_listing
         else
-            flash.now[:errors] = @equimpent_listing.errors.full_messages
+            flash.now[:errors] = @equipment_listing.errors.full_messages
             render action: 'new'
         end
 
+    end
+
+    def edit 
+
+    end
+
+    def update
+        if @equipment_listing.update(equipment_params)
+            redirect_to @equipment_listing
+        else
+            flash.now[:errors] = @equipment_listing.errors.full_messages
+            render action: 'edit'
+        end
+    end
+
+    def destroy
+        @equipment_listing.destroy
+        redirect_to equipment_listings_path
     end
     
     private
@@ -34,11 +52,11 @@ class EquipmentListingsController < ApplicationController
     end
 
     def set_equipment
-        @equimpent_listing = EquipmentListing.find(params[:id])
+        @equipment_listing = EquipmentListing.find(params[:id])
     end
 
     def equipment_params
-        params.require(:equipment_listing).permit(:user_id, :item_type_id, :title, :price, :description, :condition_id, :address_id)
+        params.require(:equipment_listing).permit(:id, :user_id, :item_type_id, :title, :price, :description, :condition_id, :address)
     end
 
 end
