@@ -1,10 +1,16 @@
 
 
-<% @item_type.each do |type| %>
+<% @item_type.each_with_index do |type, index| %>
     <ul>
         <li>
             <%= link_to type.name, [type, :equipment_listings] %>
         </li>
+        <% if index == @item_type.length - 1%>
+        <br>
+        <li>
+            <%= link_to "Show All", equipment_listings_path %>
+        </li>
+        <% end %>
     </ul>
-    
 <% end %>
+    

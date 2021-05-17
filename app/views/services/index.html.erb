@@ -10,7 +10,6 @@
             <th>Description</th>
             <th>Price</th>
             <th>Location</th>
-            <th>Actions</th>
         </tr>
         <% @services.each do |service| %>
             <tr>
@@ -19,11 +18,14 @@
                 <td><%= service.description %></td>
                 <td> $<%= service.price %> </td>
                 <td> <%= service.location %> </td>
+                
+                <% if service.user_id == current_user.id %>
                 <td>
                     <%= link_to "Edit", edit_service_path(service) %>
                 |
                     <%= link_to "Delete", service, method: :delete, data: {confirm: "Are you sure" } %>
                 </td>
+                <% end %>
             </tr>
         <% end %>
     </table>
