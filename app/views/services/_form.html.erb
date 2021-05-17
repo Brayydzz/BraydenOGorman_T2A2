@@ -1,0 +1,28 @@
+<%= form_with model: @service, local: true do |f| %>
+
+
+    <%= f.hidden_field :user_id, value: current_user.id %>
+
+    <p>
+        <%= f.label :title %>
+        <%= f.text_field :title %>
+    </p>
+    <p>
+        <%= f.label 'Description:' %>
+    </p>
+    <p>
+        <%= f.text_area :description, size: '70x5' %>
+    </p>
+    <p>
+        <%= f.label "City/Suburb" %>
+        <%= f.text_field :location %>
+    </p>
+    <p>
+        <%= f.label "Price $" %>
+        <%= f.text_field :price %>
+    </p>
+    <p>
+        <%= f.submit "Create Listing" %> 
+    </p>
+
+<% end %>

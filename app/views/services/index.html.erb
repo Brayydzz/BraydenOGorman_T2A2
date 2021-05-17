@@ -1,0 +1,30 @@
+<h1> Show Services </h1>
+
+<p> <%= link_to "Create Service Listing", new_service_path %> </p>
+
+<div>
+    <table>
+        <tr>
+            <th>Listing Owner</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Location</th>
+            <th>Actions</th>
+        </tr>
+        <% @services.each do |service| %>
+            <tr>
+                <td><%= service.user.name %></td>
+                <td> <%= link_to service.title, service_path(service)%> </td>
+                <td><%= service.description %></td>
+                <td> $<%= service.price %> </td>
+                <td> <%= service.location %> </td>
+                <td>
+                    <%= link_to "Edit", edit_service_path(service) %>
+                |
+                    <%= link_to "Delete", service, method: :delete, data: {confirm: "Are you sure" } %>
+                </td>
+            </tr>
+        <% end %>
+    </table>
+</div>

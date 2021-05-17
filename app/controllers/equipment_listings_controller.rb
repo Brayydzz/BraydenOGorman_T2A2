@@ -4,7 +4,6 @@ class EquipmentListingsController < ApplicationController
     before_action :set_condition_item_type, only: [:new, :edit, :create, :update, :index]
 
     def index
-        @item_type = ItemType.all
         if params[:item_type_id]
             @equipment_listings = EquipmentListing.where(item_type_id: params[:item_type_id])
         else
