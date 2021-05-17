@@ -10,7 +10,7 @@
             <th>Category</th>
             <th>Condition</th>
             <th>Price</th>
-            <th>Address</th>
+            <th>Location</th>
 
         </tr>
         <% @equipment_listings.each do |listing| %>
@@ -29,4 +29,7 @@
             </tr>
         <% end %>
     </table>
+
+        <%= render 'category' %>
+
 </div>

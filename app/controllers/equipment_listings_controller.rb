@@ -1,10 +1,16 @@
 class EquipmentListingsController < ApplicationController
     
     before_action :set_equipment, only: [:update, :show, :destroy, :edit]
-    before_action :set_condition_item_type, only: [:new, :edit, :create, :update]
+    before_action :set_condition_item_type, only: [:new, :edit, :create, :update, :index]
 
     def index
-        @equipment_listings = EquipmentListing.all
+        @item_type = ItemType.all
+        if params[:item_type_id]
+            @equipment_listings = EquipmentListing.where(item_type_id: params[:item_type_id])
+        else
+            @equipment_listings = EquipmentListing.all
+        end
+
     end
 
     def show

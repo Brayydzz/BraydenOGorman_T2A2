@@ -1,0 +1,10 @@
+
+
+<% @item_type.each do |type| %>
+    <ul>
+        <li>
+            <%= link_to type.name, [type, :equipment_listings] %>
+        </li>
+    </ul>
+    
+<% end %>
