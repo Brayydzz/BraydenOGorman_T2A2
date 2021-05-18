@@ -4,6 +4,14 @@ class EquipmentListingPolicy < ApplicationPolicy
     true
   end
 
+  def new 
+    user_is_owner_of_record? || (user && user.has_role?(:admin))
+  end
+
+  def create 
+    user_is_owner_of_record? || (user && user.has_role?(:admin))
+  end
+
   def edit?
     user_is_owner_of_record? || (user && user.has_role?(:admin))
   end

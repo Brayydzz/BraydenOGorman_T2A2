@@ -18,10 +18,10 @@
                 <td><%= service.description %></td>
                 <td> $<%= service.price %> </td>
                 <td> <%= service.location %> </td>
-                <td>
-                    <%= link_to "Edit", edit_service_path(service) %>
+                <td>    
+                    <%= link_to "Edit", edit_service_path(service) if policy(service).edit? %>
                 |
-                    <%= link_to "Delete", service, method: :delete, data: {confirm: "Are you sure" } %>
+                    <%= link_to "Delete", service, method: :delete, data: {confirm: "Are you sure" } if policy(service).destroy?  %>
                 </td>
             </tr>
         <% end %>

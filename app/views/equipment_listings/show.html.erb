@@ -7,10 +7,17 @@
 <p>Price: <%= @equipment_listing.price %> </p>
 <p>Location: <%= @equipment_listing.address %> </p>
 
+
+<% @equipment_listing.photos.each do |photo| %>
+<p> <%= cl_image_tag photo.key, crop: :scale, width: 150, cloud_name: 'boggyboi' %> </p>
+<% end %>
+
 <p> 
 <%= link_to "Back", equipment_listings_path %>
 |
 <%= link_to "Edit", edit_equipment_listing_path if policy(@equipment_listing).edit? %>
 |
-<%= link_to "Delete", method: :delete, data: {confirm: "Are you sure" } if policy(@equipment_listing).destroy? %>
+<%= link_to "Delete", @equipment_listing, method: :delete, data: {confirm: "Are you sure" } if policy(@equipment_listing).destroy? %>
 </p>
+
+

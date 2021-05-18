@@ -6,4 +6,8 @@
 <p> $<%= @service.price %> </p>
 <p> <%= @service.location %> </p>
 
-<p> <%= link_to "Back", services_path %> </p>
+<p> 
+    <%= link_to "Back", services_path %> 
+    <%= link_to "Edit", edit_service_path if policy(@service).edit? %>
+    <%= link_to "Delete", method: :delete, data: {confirm: "Are you sure?"} if policy(@service).destroy? %>
+</p>

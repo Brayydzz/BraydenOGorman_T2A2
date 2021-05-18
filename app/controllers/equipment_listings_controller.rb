@@ -1,8 +1,8 @@
 class EquipmentListingsController < ApplicationController
     before_action :authenticate_user!, except: [:index, :show]
     before_action :set_equipment, only: [:update, :show, :destroy, :edit]
-    before_action :check_auth, except: [:index, :show]
     before_action :set_condition_item_type, only: [:new, :edit, :create, :update, :index]
+    before_action :check_auth, except: [:index, :show, :new, :create]
 
     
     def index
@@ -20,6 +20,8 @@ class EquipmentListingsController < ApplicationController
 
     def new
         @equipment_listing = EquipmentListing.new
+        3.times {@equipment_listing.photos.build}
+
     end
 
     def create
@@ -67,7 +69,7 @@ class EquipmentListingsController < ApplicationController
     end
 
     def equipment_params
-        params.require(:equipment_listing).permit(:id, :user_id, :item_type_id, :title, :price, :description, :condition_id, :address)
+        params.require(:equipment_listing).permit(:id, :user_id, :item_type_id, :title, :price, :description, :condition_id, :address, photos: [])
     end
 
 end
