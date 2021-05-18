@@ -20,6 +20,8 @@ class EquipmentListingsController < ApplicationController
 
     def new
         @equipment_listing = EquipmentListing.new
+
+        #Build will create a empty photo object in memory.
         3.times {@equipment_listing.photos.build}
 
     end

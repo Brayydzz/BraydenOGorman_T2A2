@@ -31,15 +31,7 @@
     </p>
     <p>
         <%= f.label :photos %>
-        <%= f.file_field :photos, name: "equipment_listing[photos][]" %>
-    </p>
-    <p>
-        <%= f.label :photos %>
-        <%= f.file_field :photos, name: "equipment_listing[photos][]" %>
-    </p>
-    <p>
-        <%= f.label :photos %>
-        <%= f.file_field :photos, name: "equipment_listing[photos][]" %>
+        <%= f.file_field :photos, multiple: true , name: "equipment_listing[photos][]" %>
     </p>
     <p>
         <%= f.submit %> 
