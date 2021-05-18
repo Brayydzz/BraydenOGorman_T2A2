@@ -21,13 +21,11 @@
                 <td><%= listing.condition.name %></td>
                 <td> $<%= listing.price %> </td>
                 <td> <%= listing.address %> </td>
-                <% if listing.user_id == current_user.id %>
                 <td>
-                    <%= link_to "Edit", edit_equipment_listing_path(listing) %>
-                |
-                    <%= link_to "Delete", listing, method: :delete, data: {confirm: "Are you sure" } %>
+                    <%= link_to "Edit", edit_equipment_listing_path(listing) if policy(listing).edit? %>
+                    
+                    <%= link_to "Delete", listing, method: :delete, data: {confirm: "Are you sure" } if policy(listing).destroy? %>
                 </td>
-                <% end %>
             </tr>
         <% end %>
     </table>
@@ -35,4 +33,4 @@
         <%= render 'category' %>
     </div>
 
-</div>
+</div>  

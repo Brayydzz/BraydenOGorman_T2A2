@@ -1,8 +1,9 @@
 class EquipmentListingsController < ApplicationController
-    
-    before_action :authenticate_user!, except: [:index]
+    before_action :authenticate_user!, except: [:index, :show]
     before_action :set_equipment, only: [:update, :show, :destroy, :edit]
+    before_action :check_auth, except: [:index, :show]
     before_action :set_condition_item_type, only: [:new, :edit, :create, :update, :index]
+
     
     def index
         if params[:item_type_id]
@@ -51,6 +52,10 @@ class EquipmentListingsController < ApplicationController
     end
     
     private
+
+    def check_auth
+        authorize @equipment_listing
+    end
 
     def set_condition_item_type
         @condition = Condition.all

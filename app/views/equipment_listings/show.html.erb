@@ -7,4 +7,10 @@
 <p>Price: <%= @equipment_listing.price %> </p>
 <p>Location: <%= @equipment_listing.address %> </p>
 
-<p> <%= link_to "Back", equipment_listings_path %> </p>
+<p> 
+<%= link_to "Back", equipment_listings_path %>
+|
+<%= link_to "Edit", edit_equipment_listing_path if policy(@equipment_listing).edit? %>
+|
+<%= link_to "Delete", method: :delete, data: {confirm: "Are you sure" } if policy(@equipment_listing).destroy? %>
+</p>
