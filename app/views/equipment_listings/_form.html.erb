@@ -1,40 +1,28 @@
-<%= form_with model: @equipment_listing, local: true do |f| %>
-
-
-    <%= f.hidden_field :user_id, value: current_user.id %>
+<%= simple_form_for @equipment_listing do |f| %>
 
     <p>
-        <%= f.label :title %>
-        <%= f.text_field :title %>
+        <%= f.input :title %>
+    </p>
+    <p> 
+        <%= f.input :item_type_id, collection: @item_type %> 
+    </p>
+    <p> 
+        <%= f.input :condition_id, collection: @condition %> 
+    </p>
+    <p> 
+        <%= f.input :description %> 
+    </p>
+    <p> 
+        <%= f.input :address, label: "City/Suburb" %> 
+    </p>
+    <p> 
+        <%= f.input :price %> 
     </p>
     <p>
-        <%= f.label "Catgeory" %>
-        <%= f.collection_select :item_type_id, @item_type, :id, :name %>
+        <%= f.input :photos, :input_html => { :multiple => true }, hint: "Upload Limit: 3" %>
     </p>
     <p>
-        <%= f.label "Condition" %>
-        <%= f.collection_select :condition_id, @condition, :id, :name %>
-    </p>
-    <p>
-        <%= f.label 'Description:' %>
-    </p>
-    <p>
-        <%= f.text_area :description, size: '70x5' %>
-    </p>
-    <p>
-        <%= f.label "City/Suburb" %>
-        <%= f.text_field :address %>
-    </p>
-    <p>
-        <%= f.label "Price $" %>
-        <%= f.text_field :price %>
-    </p>
-    <p>
-        <%= f.label :photos %>
-        <%= f.file_field :photos, multiple: true , name: "equipment_listing[photos][]" %>
-    </p>
-    <p>
-        <%= f.submit %> 
+        <%= f.submit %>
     </p>
 
 <% end %>

@@ -21,13 +21,14 @@ class EquipmentListingsController < ApplicationController
     def new
         @equipment_listing = EquipmentListing.new
 
-        #Build will create a empty photo object in memory.
+        #Build will create and store an empty photo object in memory.
         3.times {@equipment_listing.photos.build}
 
     end
 
     def create
         @equipment_listing = EquipmentListing.new(equipment_params)
+        @equipment_listing.user = current_user
         if @equipment_listing.save
             redirect_to @equipment_listing
         else
