@@ -1,4 +1,27 @@
+<script>
+  function initAutocomplete() {
+
+    // Create the search box and link it to the UI element.
+    const inputs = document.getElementsByClassName("google");
+    for (let i = 0; i < inputs.length; i++) {
+      const searchBox = new google.maps.places.SearchBox(inputs[i]);
+
+      // Listen for the event fired when the user selects a prediction and retrieve
+      // more details for that place.
+      searchBox.addListener("places_changed", () => {
+        const places = searchBox.getPlaces();
+
+        if (places.length == 0) {
+          return;
+        }
+      });
+    }
+  }
+</script>
 <%= simple_form_for @service do |f| %>
+
+    <%= f.error_notification %>
+
     <p>
         <%= f.input :title %>
     </p>
@@ -6,7 +29,7 @@
         <%= f.input :description %> 
     </p>
     <p> 
-        <%= f.input :location, label: "City/Suburb" %> 
+        <%= f.input :location, label: "City/Suburb", :input_html => {class: 'google'} %> 
     </p>
     <p> 
         <%= f.input :price %> 
@@ -19,3 +42,7 @@
     </p>
 
 <% end %>
+<script
+      src=<%="https://maps.googleapis.com/maps/api/js?key=#{ENV["GOOGLE_PLACES_API"]}&callback=initAutocomplete&libraries=places&v=weekly"%>
+      async
+    ></script>

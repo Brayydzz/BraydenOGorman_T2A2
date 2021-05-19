@@ -4,14 +4,12 @@ class EquipmentListing < ApplicationRecord
   belongs_to :condition
 
   has_many_attached :photos
-  private 
+  
+  validates :photos, limit: { min: 0, max: 3, message: 'Max file limit reached. 3 Files max' }, 
+                     content_type: [:png, :jpg, :jpeg]
+  # validates :item_type, presence: true 
+  validates :description, presence: true 
+  validates :title, presence: true
+  # validates :condition, presence: true
 
-  validates :photos, limit: { min: 0, max: 3, message: 'Max file limit reached. 3 Files max' }
-
-
-
-  # Validation for maximum photo upload
-  # def validate_photos
-  #   if photos.count <= 4
-  # end 
 end

@@ -20,14 +20,16 @@
 </script>
 <%= simple_form_for @equipment_listing do |f| %>
 
+    <%= f.error_notification %>
+
     <p>
         <%= f.input :title %>
     </p>
     <p> 
-        <%= f.input :item_type_id, collection: @item_type %> 
+        <%= f.input :item_type_id, collection: @item_type, selected: @item_type %> 
     </p>
     <p> 
-        <%= f.input :condition_id, collection: @condition %> 
+        <%= f.input :condition_id, collection: @condition, selected: @condition %>
     </p>
     <p> 
         <%= f.input :description %> 

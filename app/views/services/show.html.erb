@@ -6,8 +6,10 @@
 <p> $<%= @service.price %> </p>
 <p> <%= @service.location %> </p>
 
+<p> <%= cl_image_tag @service.photo.key, crop: :scale, width: 150, cloud_name: 'boggyboi' %> </p>
+
 <p> 
     <%= link_to "Back", services_path %> 
     <%= link_to "Edit", edit_service_path if policy(@service).edit? %>
-    <%= link_to "Delete", method: :delete, data: {confirm: "Are you sure?"} if policy(@service).destroy? %>
+    <%= link_to "Delete", @service, method: :delete, data: {confirm: "Are you sure?"} if policy(@service).destroy? %>
 </p>
