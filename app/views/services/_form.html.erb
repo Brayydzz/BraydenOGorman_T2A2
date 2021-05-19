@@ -1,28 +1,21 @@
-<%= form_with model: @service, local: true do |f| %>
-
-
-    <%= f.hidden_field :user_id, value: current_user.id %>
-
+<%= simple_form_for @service do |f| %>
     <p>
-        <%= f.label :title %>
-        <%= f.text_field :title %>
+        <%= f.input :title %>
+    </p>
+    <p> 
+        <%= f.input :description %> 
+    </p>
+    <p> 
+        <%= f.input :location, label: "City/Suburb" %> 
+    </p>
+    <p> 
+        <%= f.input :price %> 
     </p>
     <p>
-        <%= f.label 'Description:' %>
+        <%= f.input :photo %>
     </p>
     <p>
-        <%= f.text_area :description, size: '70x5' %>
-    </p>
-    <p>
-        <%= f.label "City/Suburb" %>
-        <%= f.text_field :location %>
-    </p>
-    <p>
-        <%= f.label "Price $" %>
-        <%= f.text_field :price %>
-    </p>
-    <p>
-        <%= f.submit "Create Listing" %> 
+        <%= f.submit %>
     </p>
 
 <% end %>

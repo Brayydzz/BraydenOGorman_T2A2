@@ -1,6 +1,7 @@
 class ServicesController < ApplicationController
     before_action :authenticate_user!, except: [:index, :show]
     before_action :set_service, only: [:show, :update, :edit, :destroy]
+    before_action :check_auth, except: [:index, :show, :new, :create]
 
     def index 
         @services = Service.all
@@ -16,6 +17,7 @@ class ServicesController < ApplicationController
 
     def create
         @service = Service.new(service_params)
+        @service.user = current_user
         if @service.save
             redirect_to @service
         else
@@ -44,8 +46,12 @@ class ServicesController < ApplicationController
 
     private
 
+    def check_auth
+        authorize @service
+    end
+
     def service_params 
-        params.require(:service).permit(:id, :user_id, :title, :description, :price, :location)
+        params.require(:service).permit(:id, :user_id, :title, :description, :price, :location, :photo)
     end
 
     def set_service

@@ -43,7 +43,10 @@ class EquipmentListingsController < ApplicationController
     end
 
     def update
-
+        # if params[:equipment_listing][:photos].count > 3
+        #     flash[:errors] = "can't have more than 3"
+        #     render action: 'edit'
+        # end
         if @equipment_listing.update(equipment_params)
             redirect_to @equipment_listing
         else
