@@ -43,6 +43,7 @@ class EquipmentListingsController < ApplicationController
     end
 
     def update
+
         if @equipment_listing.update(equipment_params)
             redirect_to @equipment_listing
         else

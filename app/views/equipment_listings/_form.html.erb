@@ -19,7 +19,24 @@
         <%= f.input :price %> 
     </p>
     <p>
+    <script>
+        function removeHiddenInput(id) {
+            let toRemove = document.getElementsByClassName(id)
+            for (let i = 0; i < toRemove.length; i++) {
+                toRemove[i].remove()
+            }
+            let lastBoi = document.getElementsByClassName(id)[0]
+            lastBoi.remove()
+        }
+    </script>
         <%= f.input :photos, :input_html => { :multiple => true }, hint: "Upload Limit: 3" %>
+        <% if @equipment_listing.photos.blobs != [] %>
+            <% @equipment_listing.photos.each do |photo| %>
+                <button type="button" class="<%= photo.signed_id %>" onclick="removeHiddenInput('<%= photo.signed_id %>')">Remove</button>
+                <%= cl_image_tag photo.key, crop: :scale, width: 150, cloud_name: 'boggyboi', class: photo.signed_id %>
+                <%= f.input :photos, as: :hidden, :input_html => { multiple: true, value: photo.signed_id, class: photo.signed_id } %>
+            <% end %>
+        <% end %>
     </p>
     <p>
         <%= f.submit %>
