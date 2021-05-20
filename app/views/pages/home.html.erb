@@ -1,7 +1,32 @@
-<h1>Pages#home</h1>
+<div class="home">
 
-<h1>Welcome To The Pro Shop</h1>
+    <h1>Welcome To The Pro Shop</h1>
 
-<%= link_to '<button type="button">Shop Equipment Now</button>'.html_safe, equipment_listings_path %>
+    <p><%= link_to '<button type="button">Shop Equipment Now</button>'.html_safe, equipment_listings_path %></p>
 
-<%= link_to '<button type="button">View Golfing Services</button>'.html_safe, services_path %>
+    <p><%= link_to '<button type="button">View Golfing Services</button>'.html_safe, services_path %></p>
+
+    <p><%= link_to '<button type="button">Post an ad!</button>'.html_safe, new_equipment_listing_path %></p>
+
+    <h4>Latest Listings</h4>
+    <% @equipment_listings[0..3].each do |listing| %>
+    <div class= 'latest-listing'>
+        <div class= "listing-card">
+            <% listing.photos.each do |photo| %>
+                <% if listing.photos.count == 0 %>
+                    <p>  IMAGE <%= image_tag("http://via.placeholder.com/80") %> </p>
+                <% else %>
+                    <p> <%= cl_image_tag photo.key, crop: :scale, width: 100, cloud_name: 'boggyboi' %> </p>
+                <% end %>
+            <% end %>
+            <h4> <%= link_to listing.title, equipment_listing_path(listing) %> </h4>
+            <h6> <%= listing.price %> </h6>
+            <p> <%= listing.description %> </p>
+            <p> <%= listing.address %> </p>
+
+
+            
+        </div>
+    <% end %>
+    </div>
+</div>

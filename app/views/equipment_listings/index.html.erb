@@ -1,36 +1,45 @@
-<h1>EQUIPMENT LISTINGS</h1>
-
-<p> <%= link_to "Create New Listing", new_equipment_listing_path %> </p>
-
-<div>
-    <table>
-        <tr>
-            <th>Listing Owner</th>
-            <th>Title</th>
-            <th>Category</th>
-            <th>Condition</th>
-            <th>Price</th>
-            <th>Location</th>
-
-        </tr>
-        <% @equipment_listings.each do |listing| %>
-            <tr>
-                <td><%= listing.user.name %></td>
-                <td> <%= link_to listing.title, equipment_listing_path(listing)%> </td>
-                <td><%= listing.item_type.name %></td>
-                <td><%= listing.condition.name %></td>
-                <td> $<%= listing.price %> </td>
-                <td> <%= listing.address %> </td>
-                <td>
-                    <%= link_to "Edit", edit_equipment_listing_path(listing) if policy(listing).edit? %>
-                    
-                    <%= link_to "Delete", listing, method: :delete, data: {confirm: "Are you sure" } if policy(listing).destroy? %>
-                </td>
-            </tr>
-        <% end %>
-    </table>
+<div class="equip-index">
+    <h1>EQUIPMENT LISTINGS</h1>
+    <p> <%= link_to "Create New Listing", new_equipment_listing_path %> </p>
+    <% if params[:item_type_id] %>
+        <p>Total Listings: <%= @equipment_listings.count %> 
+            <% @category.each do |category| %>
+                <%= category.name %> 
+            <% end %>
+        </p>
+    <% else %>
+        <p>Total listings: <%= @equipment_listings.count %> </p>
+    <% end %>
     <div>
-        <%= render 'category' %>
-    </div>
+        <table>
+            <tr>
+                <th>Listing Owner</th>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Condition</th>
+                <th>Price</th>
+                <th>Location</th>
 
-</div>  
+            </tr>
+            <% @equipment_listings.each do |listing| %>
+                <tr>
+                    <td><%= listing.user.name %></td>
+                    <td> <%= link_to listing.title, equipment_listing_path(listing)%> </td>
+                    <td><%= listing.item_type.name %></td>
+                    <td><%= listing.condition.name %></td>
+                    <td> $<%= listing.price %> </td>
+                    <td> <%= listing.address %> </td>
+                    <td>
+                        <%= link_to "Edit", edit_equipment_listing_path(listing) if policy(listing).edit? %>
+                        
+                        <%= link_to "Delete", listing, method: :delete, data: {confirm: "Are you sure" } if policy(listing).destroy? %>
+                    </td>
+                </tr>
+            <% end %>
+        </table>
+        <div class= 'category' >
+            <%= render 'category' %>
+        </div>
+
+    </div> 
+</div> 

@@ -4,10 +4,10 @@ class EquipmentListingsController < ApplicationController
     before_action :set_condition_item_type, only: [:new, :edit, :create, :update, :index]
     before_action :check_auth, except: [:index, :show, :new, :create]
 
-    
     def index
         if params[:item_type_id]
             @equipment_listings = EquipmentListing.where(item_type_id: params[:item_type_id])
+            @category = ItemType.where(id: params[:item_type_id])
         else
             @equipment_listings = EquipmentListing.all
         end
@@ -43,10 +43,6 @@ class EquipmentListingsController < ApplicationController
     end
 
     def update
-        # if params[:equipment_listing][:photos].count > 3
-        #     flash[:errors] = "can't have more than 3"
-        #     render action: 'edit'
-        # end
         if @equipment_listing.update(equipment_params)
             redirect_to @equipment_listing
         else
