@@ -1,0 +1,46 @@
+<h1>Account Details</h1>
+
+<p>Name: <%= current_user.name %> </p>
+
+<p>Email: <%= current_user.email %> </p>
+
+<p>Phone: <%= current_user.phone %> </p>
+
+<p> <%= link_to "Edit Account Details", edit_user_registration_path %>  </p>
+<hr>
+<h3>Current Equipment Listed</h3>
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Category</th>
+    </tr>
+    <% current_user.equipment_listings.each do |listing| %>
+        <tr>
+            <td> <%= link_to listing.title, equipment_listing_path(listing)%> </td>
+            <td><%= listing.item_type.name %></td>
+            <td>
+                <%= link_to "Edit", edit_equipment_listing_path(listing) if policy(listing).edit? %>
+                
+                <%= link_to "Delete", listing, method: :delete, data: {confirm: "Are you sure" } if policy(listing).destroy? %>
+            </td>
+        </tr>
+    <% end %>
+</table>
+<hr>
+<h3>Current Service Listings</h3>
+<table>
+        <tr>
+            <th>Title</th>
+        </tr>
+        <% current_user.services.each do |service| %>
+            <tr>
+                <td> <%= link_to service.title, service_path(service)%> </td>
+                <td>    
+                    <%= link_to "Edit", edit_service_path(service) if policy(service).edit? %>
+                |
+                    <%= link_to "Delete", service, method: :delete, data: {confirm: "Are you sure" } if policy(service).destroy?  %>
+                </td>
+            </tr>
+        <% end %>
+    </table>
+
