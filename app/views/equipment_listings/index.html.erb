@@ -8,7 +8,7 @@
             <% end %>
         </p>
     <% else %>
-        <p>Total listings: <%= @equipment_listings.count %> </p>
+        <p>Total listings: <%= @count %> </p>
     <% end %>
     <div>
         <table>
@@ -37,9 +37,11 @@
                 </tr>
             <% end %>
         </table>
+        <%= paginate @equipment_listings %>
         <div class= 'category' >
             <%= render 'category' %>
         </div>
+
 
     </div> 
 </div> 

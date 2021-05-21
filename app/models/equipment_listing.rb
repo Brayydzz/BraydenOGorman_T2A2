@@ -12,4 +12,5 @@ class EquipmentListing < ApplicationRecord
   validates :title, presence: true
   # validates :condition, presence: true
 
+
 end

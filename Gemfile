@@ -73,3 +73,5 @@ gem "active_storage_validations", "~> 0.9.3"
 gem "simple_form", "~> 5.1"
 
 gem "mailboxer", "~> 0.15.1"
+
+gem "kaminari", "~> 1.2"

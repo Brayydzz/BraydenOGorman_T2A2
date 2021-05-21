@@ -1,7 +1,7 @@
 <h1> Show Services </h1>
 
 <p> <%= link_to "Create Service Listing", new_service_path %> </p>
-
+<%= paginate @services %>
 <div>
     <table>
         <tr>
