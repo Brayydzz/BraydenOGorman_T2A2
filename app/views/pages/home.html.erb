@@ -12,17 +12,15 @@
     <% @equipment_listings[0..3].each do |listing| %>
     <div class= 'latest-listing'>
         <div class= "listing-card">
-            <% listing.photos.each do |photo| %>
-                <% if listing.photos.count == 0 %>
-                    <p>  IMAGE <%= image_tag("http://via.placeholder.com/80") %> </p>
-                <% else %>
-                    <p> <%= cl_image_tag photo.key, crop: :scale, width: 100, cloud_name: 'boggyboi' %> </p>
-                <% end %>
+            <% if !listing.photos.attached? %>
+                <p><%= image_tag("http://via.placeholder.com/100") %> </p>
+            <% else %>
+                <p> <%= cl_image_tag listing.photos.first.key, crop: :scale, width: 100, cloud_name: 'boggyboi' %> </p>
             <% end %>
             <h4> <%= link_to listing.title, equipment_listing_path(listing) %> </h4>
-            <h6> <%= listing.price %> </h6>
+            <h6> $<%= listing.price %> </h6>
             <p> <%= listing.description %> </p>
-            <p> <%= listing.address %> </p>
+            <p>Location: <%= listing.address %> </p>
 
 
             

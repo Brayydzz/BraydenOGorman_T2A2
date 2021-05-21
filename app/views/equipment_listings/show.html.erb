@@ -1,12 +1,14 @@
 <h1>SHOW LISTING</h1>
 
+
+
 <h2><%= @equipment_listing.title %></h2>
+<h3>Owner: <%= @equipment_listing.user.name %> </h3>
 <p>Category: <%= @equipment_listing.item_type.name %> </p>
 <p>Condition: <%= @equipment_listing.condition.name %> </p>
 <p>Description: <%= @equipment_listing.description %> </p>
 <p>Price: <%= @equipment_listing.price %> </p>
 <p>Location: <%= @equipment_listing.address %> </p>
-
 
 <% @equipment_listing.photos.each do |photo| %>
 <p> <%= cl_image_tag photo.key, crop: :scale, width: 150, cloud_name: 'boggyboi' %> </p>
@@ -19,5 +21,7 @@
 |
 <%= link_to "Delete", @equipment_listing, method: :delete, data: {confirm: "Are you sure" } if policy(@equipment_listing).destroy? %>
 </p>
+
+<%= link_to "Message Owner", new_conversation_path %>
 
 

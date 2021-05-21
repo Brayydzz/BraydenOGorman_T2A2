@@ -16,6 +16,7 @@ class EquipmentListingsController < ApplicationController
 
     def show
 
+        session[:listing_id] = @equipment_listing.user.id
     end
 
     def new

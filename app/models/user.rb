@@ -7,6 +7,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  acts_as_messageable
+
   # Creates a default role when a user signs up
   after_create :default_role
 
