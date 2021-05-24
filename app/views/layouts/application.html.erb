@@ -5,46 +5,55 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous" defer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous" defer></script>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
     <header>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-          <img src="http://via.placeholder.com/80" alt="The Pro Shop logo">
-          <ul>
-            <li>
-              <%= link_to "Home", root_path %>
-            </li>
-            
-            <li>
-              <%= link_to "Equipment", equipment_listings_path %>
-            </li>
-            
-            <li>
-              <%= link_to "Services", services_path %>
-            </li>
-            
-            <li>
-              <%= link_to "Messages", conversations_path %>
-            </li>
-            
-            <li class='login'>
-              <% if user_signed_in? %>
-                <%= link_to current_user.name, users_index_path %>
-                
-                <%= link_to "(Sign out)", destroy_user_session_path, method: :delete %>
-              <% else %>
-                <%= link_to "login/signup", new_user_session_path %>
-              <% end %>
-            </li>
-            
-          </ul>
-        </div>
-      </nav>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+          <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">
+              <img src="http://via.placeholder.com/80" alt="The Pro Shop logo">
+            </span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarColor01">
+              <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                  <%= link_to "Home", root_path, class: "nav-link active" %>
+                    <span class="visually-hidden">(current)</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "Equipment", equipment_listings_path, class: "nav-link" %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "Services", services_path, class: "nav-link" %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "Messages", conversations_path, class: "nav-link" %>
+                </li>
+                    <% if user_signed_in? %>
+                      <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">My Account</a>
+                      <div class="dropdown-menu">
+                        <%= link_to current_user.name, users_index_path, class: "dropdown-item" %>
+                      <div class="dropdown-divider"></div>
+                        <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+                    <% else %>
+                      <%= link_to "login/signup", new_user_session_path, class: "nav-link" %>
+                    <% end %>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+
     </header>
     <% if notice %>
       <p class="notice"><%= notice %></p>
