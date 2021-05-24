@@ -1,30 +1,41 @@
-<div class="home">
-
-    <h1>Welcome To The Pro Shop</h1>
-
-    <p><%= link_to '<button type="button">Shop Equipment Now</button>'.html_safe, equipment_listings_path %></p>
-
-    <p><%= link_to '<button type="button">View Golfing Services</button>'.html_safe, services_path %></p>
-
-    <p><%= link_to '<button type="button">Post an ad!</button>'.html_safe, new_equipment_listing_path %></p>
-
-    <h4>Latest Listings</h4>
-    <% @equipment_listings[0..3].each do |listing| %>
-    <div class= 'container border'>
-        <div class= "container">
-            <% if !listing.photos.attached? %>
-                <p><%= image_tag("http://via.placeholder.com/100") %> </p>
-            <% else %>
-                <p> <%= cl_image_tag listing.photos.first.key, crop: :scale, width: 100, cloud_name: 'boggyboi' %> </p>
-            <% end %>
-            <h4> <%= link_to listing.title, equipment_listing_path(listing) %> </h4>
-            <h6> $<%= listing.price %> </h6>
-            <p> <%= listing.description %> </p>
-            <p>Location: <%= listing.address %> </p>
-
-
-            
+<main>
+    <section class='py-5 text-center container'>
+        <div class='row py-lg-5'>
+            <div class='col-lg-6 col-md-8 mx-auto'>
+                <h1 class='fw-light'>Welcome To The Pro Shop</h1>
+                <p class='lead text-muted'>
+                    List your second hand golfing equipment or services here
+                </p>
+                <p>
+                    <%= link_to 'Shop Equipment Now'.html_safe, equipment_listings_path, class: 'btn btn-primary my-2' %>
+                    <%= link_to 'View Golfing Services'.html_safe, services_path, class: 'btn btn-primary my-2' %>
+                </p>
+                <p>
+                    <%= link_to 'Post an ad!'.html_safe, new_equipment_listing_path, class: 'btn btn-secondary my-2' %>
+                </p>
+            </div>
         </div>
-    <% end %>
+        <h4 class='text-center'>Latest Listings</h4>
+    </section>
+    <div class='album py-5 bg-light'>
+        <div class='container'>
+            <div class='row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3'>
+                <% @equipment_listings[0..3].each do |listing| %>
+                <div class='col'>
+                    <div class='card shadow-sm'>
+                        <% if !listing.photos.attached? %>
+                            <p><%= image_tag("http://via.placeholder.com/100") %> </p>
+                        <% else %>
+                            <p> <%= cl_image_tag listing.photos.first.key, crop: :scale, width: 100, cloud_name: 'boggyboi' %> </p>
+                        <% end %>
+                        <h4> <%= link_to listing.title, equipment_listing_path(listing) %> </h4>
+                        <h6> $<%= listing.price %> </h6>
+                        <p> <%= listing.description %> </p>
+                        <p>Location: <%= listing.address %> </p>
+                    </div>
+                </div>
+                <% end %>
+            </div>
+        </div>    
     </div>
-</div>
+</main>
