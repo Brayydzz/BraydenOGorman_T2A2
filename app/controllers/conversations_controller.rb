@@ -3,7 +3,7 @@ class ConversationsController < ApplicationController
     before_action :set_conversation, only: [:update, :show, :destroy, :edit]
 
     def index 
-        @conversations = current_user.mailbox.conversations
+        @conversations = current_user.mailbox.conversations.page(params[:page]).per(5)
         session[:listing_id] = nil
     end
 
@@ -18,6 +18,11 @@ class ConversationsController < ApplicationController
         recipient = User.find(params[:user_id])
         receipt = current_user.send_message(recipient, params[:body], params[:subject])
         redirect_to conversation_path(receipt.conversation)
+    end
+
+    def destroy 
+        @conversation.destroy
+        redirect_to conversations_path
     end
 
 

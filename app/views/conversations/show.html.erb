@@ -1,5 +1,9 @@
 <h1><%= @conversation.subject %></h1>
 
+<p>
+    <%= link_to "Delete", conversation_path(@conversation), method: :delete, data: {confirm: "Are you sure" } if policy(@conversation).destroy? %>
+</p>
+
 <% @conversation.receipts_for(current_user).each do |receipt| %>
     <div>
         <div> <%= receipt.message.sender.name %> commented: </div>
