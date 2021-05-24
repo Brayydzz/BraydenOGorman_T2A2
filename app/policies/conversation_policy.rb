@@ -13,7 +13,7 @@ class Mailboxer::ConversationPolicy < ApplicationPolicy
     end
   
     def destroy? 
-      true
+        true
     end
   
     private

@@ -10,8 +10,8 @@
 
     <h4>Latest Listings</h4>
     <% @equipment_listings[0..3].each do |listing| %>
-    <div class= 'latest-listing'>
-        <div class= "listing-card">
+    <div class= 'container border'>
+        <div class= "container">
             <% if !listing.photos.attached? %>
                 <p><%= image_tag("http://via.placeholder.com/100") %> </p>
             <% else %>

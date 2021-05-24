@@ -2,35 +2,3 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
-
-.listing-card {
-    border: 2px black solid;
-    width: 325px ;
-    margin: 5px ; 
-    padding: 5px; 
-    display: flex;
-    flex-direction: column;  
-    justify-content: center;
-    align-items: center;
-}
-
-.latest-listing {
-    border: 2px black solid;
-    display: flex;
-    flex: 1;
-}
-
-
-
-.home {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    h1{
-        margin: 75px ;
-        flex: 3;
-        
-    }
-}

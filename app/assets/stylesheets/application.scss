@@ -10,65 +10,11 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
- *= require_self
  */
 
- .navbar {
-    figure{
-        flex: 1;
-        display: flex;
-        img {
-            margin-left: 30px;
-        }
-    }
-}
+ // Custom bootstrap variables must be set or imported *before* bootstrap.
+@import "bootstrap";
 
-li {
-    a{
-        text-decoration: none;
-    }
 
-}
-
-.navbar {
-    background-color: #333;
-    display: flex;
-    align-items: center;
-    a {
-        color: #e7e7e7;
-    }
-}
-
-.navbar ul {
-    margin: 0;
-    padding: 0;
-    flex: 6;
-    list-style-type: none;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-        li {
-            color: #e7e7e7;
-
-            a {
-                color: #e7e7e7;
-                padding: 24px;
-                display: block;
-
-            }
-        }
-
-    }
-
-.navbar ul a:hover,
-.navbar ul a:focus {
-    background-color: #272727;
-}
-
-.login {
-    display: flex;
-    align-items: center;
-}
 
 

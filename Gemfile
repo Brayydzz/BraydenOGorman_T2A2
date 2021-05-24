@@ -75,3 +75,7 @@ gem "simple_form", "~> 5.1"
 gem "mailboxer", "~> 0.15.1"
 
 gem "kaminari", "~> 1.2"
+
+gem "bootstrap", "~> 5.0"
+
+gem "jquery-rails", "~> 4.4"
