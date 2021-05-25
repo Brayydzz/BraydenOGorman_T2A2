@@ -1,55 +1,63 @@
-    <div class='row'>
-        <div class='col-md-auto'>
-            <div class= 'd-flex flex-column flex-shrink-0 p-3 text-white bg-dark' style='width: 200px' >
-                <%= render 'category' %>
+<div class='row'>
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasLabel">Categories</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
-        </div> 
-        <div class='col'>
-            <p> <%= link_to "Create New Listing", new_equipment_listing_path %> </p>
-            <% if params[:item_type_id] %>
-                <p>Total Listings: <%= @equipment_listings.count %> 
-                    <% @category.each do |category| %>
-                        <%= category.name %> 
-                    <% end %>
-                </p>
-            <% else %>
-                <p>Total listings: <%= @count %> </p>
-            <% end %>
-            <%= paginate @equipment_listings %>
-            <div class='container'>
-                <% @equipment_listings.each do |listing| %>
-                <div class="card mb-3 border-dark ">
-                    <div class='row g-0'>
-                        <div class='col-md-3 d-flex p-2'>
-                            <div>
-                                <% if !listing.photos.attached? %>
-                                    <%= image_tag("http://via.placeholder.com/50", width: 200, height: 200, class: 'rounded d-flex image-fluid')%>
-                                <% else %>
-                                    <%= cl_image_tag listing.photos.first.key, crop: :scale, width: 200, height: 200, cloud_name: 'boggyboi', class: 'rounded image-fluid'%>
-                                <% end %>
-                            </div>
-                        </div>
-                        <div class='col-md-7 d-flex '>
-                            <div class='card-body d-flex flex-column justify-content-evenly'>
-                                <h4 class="card-title"> <%= link_to listing.title, equipment_listing_path(listing)%> </h4>
-                                <p class="card-text"> <%= listing.description %> </p>
-                            </div>
-                        </div>
-                        <div class='col-md-2 d-flex flex-column justify-content-evenly'>
-                            <h4> $<%= listing.price %> </h4>
-                            <p class="card-text">Condition: <%= listing.condition.name %></p>
-                            <p class="card-text">Location: <%= listing.address %> </p>
-                            <p>
-                                <%= link_to "Edit", edit_equipment_listing_path(listing) if policy(listing).edit? %>
-                    
-                                <%= link_to "Delete", listing, method: :delete, data: {confirm: "Are you sure" } if policy(listing).destroy? %>
-                            </p>
-                        </div>    
-                    </div>
-                </div>
-                <% end %>
-                <%= paginate @equipment_listings %>
+            <div class="offcanvas-body">
+                <nav>
+                    <%= render 'category' %>
+                </nav>
             </div>
         </div>
+    <div class='col'>
+        <div class='container'>
+        <p><%= link_to "Create New Listing", new_equipment_listing_path, class: "btn btn-primary"%></p>
+        <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvas" role="button" aria-controls="offcanvas">
+            Categories
+        </a>
+        <p><%= paginate @equipment_listings %></p>
+        <% if params[:item_type_id] %>
+            <p>Total Listings: <%= @equipment_listings.count %> 
+                <% @category.each do |category| %>
+                    <%= category.name %> 
+                <% end %>
+            </p>
+        <% else %>
+            <p>Total listings: <%= @count %> </p>
+        <% end %>
+            <% @equipment_listings.each do |listing| %>
+            <div class="card mb-3 border-dark ">
+                <div class='row g-0'>
+                    <div class='col-md-3 d-flex p-2'>
+                        <div>
+                            <% if !listing.photos.attached? %>
+                                <%= image_tag("http://via.placeholder.com/50", width: 175, height: 175, class: 'rounded d-flex image-fluid')%>
+                            <% else %>
+                                <%= cl_image_tag listing.photos.first.key, crop: :scale, width: 175, height: 175, cloud_name: 'boggyboi', class: 'rounded image-fluid'%>
+                            <% end %>
+                        </div>
+                    </div>
+                    <div class='col-md-7 d-flex '>
+                        <div class='card-body d-flex flex-column justify-content-evenly'>
+                            <h4 class="card-title"> <%= link_to listing.title, equipment_listing_path(listing)%> </h4>
+                            <p class="card-text"> <%= listing.description %> </p>
+                        </div>
+                    </div>
+                    <div class='col-md-2 d-flex flex-column justify-content-evenly'>
+                        <h4> $<%= listing.price %> </h4>
+                        <p class="card-text">Condition: <%= listing.condition.name %></p>
+                        <p class="card-text">Location: <%= listing.address %> </p>
+                        <p>
+                            <%= link_to "Edit", edit_equipment_listing_path(listing) if policy(listing).edit? %>
+                
+                            <%= link_to "Delete", listing, method: :delete, data: {confirm: "Are you sure" } if policy(listing).destroy? %>
+                        </p>
+                    </div>    
+                </div>
+            </div>
+            <% end %>
+            <%= paginate @equipment_listings %>
+        </div>
     </div>
-
+</div>
