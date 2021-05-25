@@ -1,47 +1,47 @@
-<div class="equip-index">
-    <h1>EQUIPMENT LISTINGS</h1>
-    <p> <%= link_to "Create New Listing", new_equipment_listing_path %> </p>
-    <% if params[:item_type_id] %>
-        <p>Total Listings: <%= @equipment_listings.count %> 
-            <% @category.each do |category| %>
-                <%= category.name %> 
-            <% end %>
-        </p>
-    <% else %>
-        <p>Total listings: <%= @count %> </p>
-    <% end %>
-    <div>
-        <table>
-            <tr>
-                <th>Listing Owner</th>
-                <th>Title</th>
-                <th>Category</th>
-                <th>Condition</th>
-                <th>Price</th>
-                <th>Location</th>
-
-            </tr>
-            <% @equipment_listings.each do |listing| %>
-                <tr>
-                    <td><%= listing.user.name %></td>
-                    <td> <%= link_to listing.title, equipment_listing_path(listing)%> </td>
-                    <td><%= listing.item_type.name %></td>
-                    <td><%= listing.condition.name %></td>
-                    <td> $<%= listing.price %> </td>
-                    <td> <%= listing.address %> </td>
-                    <td>
-                        <%= link_to "Edit", edit_equipment_listing_path(listing) if policy(listing).edit? %>
-                        
-                        <%= link_to "Delete", listing, method: :delete, data: {confirm: "Are you sure" } if policy(listing).destroy? %>
-                    </td>
-                </tr>
-            <% end %>
-        </table>
-        <%= paginate @equipment_listings %>
-        <div class= 'category' >
+<div class='row'>
+    <div class='col-md-auto'>
+        <div class= 'd-flex flex-column flex-shrink-0 p-3 text-white bg-dark' style='width: 200px' >
             <%= render 'category' %>
         </div>
-
-
     </div> 
-</div> 
+    <div class='col'>
+        <p> <%= link_to "Create New Listing", new_equipment_listing_path %> </p>
+        <% if params[:item_type_id] %>
+            <p>Total Listings: <%= @equipment_listings.count %> 
+                <% @category.each do |category| %>
+                    <%= category.name %> 
+                <% end %>
+            </p>
+        <% else %>
+            <p>Total listings: <%= @count %> </p>
+        <% end %>
+        <%= paginate @equipment_listings %>
+        <div class='container'>
+                <% @equipment_listings.each do |listing| %>
+            <div class='row'>
+                <div class='col'>
+                    <% if !listing.photos.attached? %>
+                        <%= image_tag("http://via.placeholder.com/50", width: 300, height: 300)  %>
+                    <% else %>
+                        <%= cl_image_tag listing.photos.first.key, crop: :scale, width: 300, cloud_name: 'boggyboi'%>
+                    <% end %>
+                </div>
+                <div class='col-8'>
+                    <p> <%= link_to listing.title, equipment_listing_path(listing)%> </p>
+                    <p><%= listing.item_type.name %></p>
+                    <p><%= listing.condition.name %></p>
+                    <p> $<%= listing.price %> </p>
+                    <p> <%= listing.address %> </p>
+                    <p>
+                        <%= link_to "Edit", edit_equipment_listing_path(listing) if policy(listing).edit? %>
+            
+                        <%= link_to "Delete", listing, method: :delete, data: {confirm: "Are you sure" } if policy(listing).destroy? %>
+                    </p>
+                </div>
+            </div>
+                <% end %>
+    </div>
+        </div>
+            <%= paginate @equipment_listings %>
+</div>
+

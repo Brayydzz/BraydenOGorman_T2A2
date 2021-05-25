@@ -1,14 +1,15 @@
 
-
+<h5>Categories</h5>
+<hr>
 <% @item_type.each_with_index do |type, index| %>
-    <ul>
-        <li>
-            <%= link_to type.name, [type, :equipment_listings] %>
+    <ul class='nav nav-pills flex-column mb-auto'>
+        <li class='nav-item'>
+            <%= link_to type.name, [type, :equipment_listings], class: 'nav-link text-white'%>
         </li>
         <% if index == @item_type.length - 1%>
-        <br>
-        <li>
-            <%= link_to "Show All", equipment_listings_path %>
+        <hr>
+        <li >
+            <%= link_to "Show All", equipment_listings_path, class: 'nav-link text-white' %>
         </li>
         <% end %>
     </ul>
