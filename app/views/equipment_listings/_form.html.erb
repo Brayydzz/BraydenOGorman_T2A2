@@ -51,7 +51,7 @@
             lastBoi.remove()
         }
     </script>
-        <%= f.input :photos, :input_html => { :multiple => true }, hint: "Upload Limit: 3" %>
+        <%= f.input :photos, :input_html => { :multiple => true }, hint: "Upload Limit: 5" %>
         <% if @equipment_listing.photos.blobs != [] %>
             <% @equipment_listing.photos.each do |photo| %>
                 <button type="button" class="<%= photo.signed_id %>" onclick="removeHiddenInput('<%= photo.signed_id %>')">Remove</button>

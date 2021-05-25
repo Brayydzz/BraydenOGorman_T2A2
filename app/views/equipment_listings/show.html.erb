@@ -1,27 +1,94 @@
-<h1>SHOW LISTING</h1>
+
+            <!-- Swiper -->
+            <div class="swiper-container mySwiper">
+                <div class="swiper-wrapper">
+                    <% @equipment_listing.photos.each do |photo| %>
+                    <div class="swiper-slide">
+                        <%= cl_image_tag photo.key, crop: :scale, width: 500, cloud_name: 'boggyboi' %>
+                    </div>
+                    <% end %>
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
+            </div>
+        <h2><%= @equipment_listing.title %></h2>
+        <h3>Owner: <%= @equipment_listing.user.name %> </h3>
+        <p>Category: <%= @equipment_listing.item_type.name %> </p>
+        <p>Condition: <%= @equipment_listing.condition.name %> </p>
+        <p>Description: <%= @equipment_listing.description %> </p>
+        <p>Price: <%= @equipment_listing.price %> </p>
+        <p>Location: <%= @equipment_listing.address %> </p>
+        <p>
+        <%= link_to "Back", equipment_listings_path %>
+        |
+        <%= link_to "Edit", edit_equipment_listing_path if policy(@equipment_listing).edit? %>
+        |
+        <%= link_to "Delete", @equipment_listing, method: :delete, data: {confirm: "Are you sure" } if policy(@equipment_listing).destroy? %>
+        </p>
+        <%= link_to "Message Owner", new_conversation_path %>
+        
+    </div>
 
 
 
-<h2><%= @equipment_listing.title %></h2>
-<h3>Owner: <%= @equipment_listing.user.name %> </h3>
-<p>Category: <%= @equipment_listing.item_type.name %> </p>
-<p>Condition: <%= @equipment_listing.condition.name %> </p>
-<p>Description: <%= @equipment_listing.description %> </p>
-<p>Price: <%= @equipment_listing.price %> </p>
-<p>Location: <%= @equipment_listing.address %> </p>
+    <style>
+      .swiper-container {
+        width: 40%;
+        height: 40%;
+      }
 
-<% @equipment_listing.photos.each do |photo| %>
-<p> <%= cl_image_tag photo.key, crop: :scale, width: 150, cloud_name: 'boggyboi' %> </p>
-<% end %>
+      .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
 
-<p> 
-<%= link_to "Back", equipment_listings_path %>
-|
-<%= link_to "Edit", edit_equipment_listing_path if policy(@equipment_listing).edit? %>
-|
-<%= link_to "Delete", @equipment_listing, method: :delete, data: {confirm: "Are you sure" } if policy(@equipment_listing).destroy? %>
-</p>
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+      }
 
-<%= link_to "Message Owner", new_conversation_path %>
+      .swiper-slide img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .swiper-container {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    </style>
+
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+      var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        loop: true,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
+    </script>
 
 

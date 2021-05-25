@@ -5,7 +5,7 @@ class EquipmentListing < ApplicationRecord
 
   has_many_attached :photos
   
-  validates :photos, limit: { min: 0, max: 3, message: 'Max file limit reached. 3 Files max' }, 
+  validates :photos, limit: { min: 0, max: 5, message: 'Max file limit reached. 5 Files max' }, 
                      content_type: [:png, :jpg, :jpeg]
   # validates :item_type, presence: true 
   validates :description, presence: true 
