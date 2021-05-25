@@ -16,32 +16,37 @@
             <p>Total listings: <%= @count %> </p>
         <% end %>
         <%= paginate @equipment_listings %>
-        <div class='container'>
+        <div class="card mb-3">
                 <% @equipment_listings.each do |listing| %>
-            <div class='row'>
-                <div class='col'>
-                    <% if !listing.photos.attached? %>
-                        <%= image_tag("http://via.placeholder.com/50", width: 300, height: 300)  %>
-                    <% else %>
-                        <%= cl_image_tag listing.photos.first.key, crop: :scale, width: 300, cloud_name: 'boggyboi'%>
-                    <% end %>
+            <div class='row g-0'>
+                <div class='col-md-4 d-flex justify-content-centre align-items-centre'>
+                    <div class='h-75 w-75'>
+                        <% if !listing.photos.attached? %>
+                            <%= image_tag("http://via.placeholder.com/50", width: 200, height: 200, class: 'rounded d-flex')%>
+                        <% else %>
+                            <%= cl_image_tag listing.photos.first.key, crop: :scale, width: 200, height: 200, cloud_name: 'boggyboi', class: ' rounded d-flex justify-content-centre'%>
+                        <% end %>
+                    </div>
                 </div>
-                <div class='col-8'>
-                    <p> <%= link_to listing.title, equipment_listing_path(listing)%> </p>
-                    <p><%= listing.item_type.name %></p>
-                    <p><%= listing.condition.name %></p>
-                    <p> $<%= listing.price %> </p>
-                    <p> <%= listing.address %> </p>
-                    <p>
-                        <%= link_to "Edit", edit_equipment_listing_path(listing) if policy(listing).edit? %>
-            
-                        <%= link_to "Delete", listing, method: :delete, data: {confirm: "Are you sure" } if policy(listing).destroy? %>
-                    </p>
+                <div class='col-md-8'>
+                    <div class='card-body'>
+                                <h4 class="card-title"> <%= link_to listing.title, equipment_listing_path(listing)%> </h4>
+                                <p class="card-text"> <%= listing.description %> </p>
+                                <h4> $<%= listing.price %> </h4>
+                                <p class="card-text">Condition: <%= listing.condition.name %></p>
+                                <p class="card-text">Location: <%= listing.address %> </p>
+                                <p>
+                                    <%= link_to "Edit", edit_equipment_listing_path(listing) if policy(listing).edit? %>
+                        
+                                    <%= link_to "Delete", listing, method: :delete, data: {confirm: "Are you sure" } if policy(listing).destroy? %>
+                                </p>
+                    </div>
                 </div>
             </div>
+                <hr>
                 <% end %>
-    </div>
         </div>
             <%= paginate @equipment_listings %>
+    </div>
 </div>
 
