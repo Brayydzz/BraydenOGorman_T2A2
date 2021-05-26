@@ -1,7 +1,9 @@
 <div class='card text-center'>
     <h1> All conversations</h1>
         <%= paginate @conversations %>
-    
+    <% if @conversations.empty? %>
+        <h6> You have no conversations </h6>
+    <% end %>
     <% @conversations.each do |conversation| %>
         <div>
             <%= link_to conversation.subject + " - " + conversation.recipients.delete_if {|x| x == current_user }[0].name, conversation_path(conversation) %>
