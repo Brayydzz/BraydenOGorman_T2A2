@@ -37,7 +37,7 @@
                 <div class='col d-flex flex-column justify-content-evenly'>
                 <% if user_signed_in? == false || current_user.id != @equipment_listing.user_id  %>
                     <%= link_to "Message Owner", new_conversation_path, class: 'btn btn-primary my-2' %>
-                    <% else %>
+                <% else %>
 
                 <% end %>
                 <p class='d-flex justify-content-evenly'>

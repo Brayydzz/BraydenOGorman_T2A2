@@ -8,7 +8,7 @@ class ServicesController < ApplicationController
     end
 
     def show 
-        
+        session[:listing_id] = @service.user_id
     end
 
     def new
