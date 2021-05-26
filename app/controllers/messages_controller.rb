@@ -7,8 +7,9 @@ class MessagesController < ApplicationController
             flash[:alert] = "You cannot send an empty message"
             redirect_to conversation_path(@conversation)
         else
-            receipt = current_user.reply_to_conversation(@conversation, message_params)
+            receipt = current_user.reply_to_conversation(@conversation, message_params[:body])
             redirect_to conversation_path(receipt.conversation)
+            p message_params
         end
     end
 
