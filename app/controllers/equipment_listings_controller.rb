@@ -4,6 +4,8 @@ class EquipmentListingsController < ApplicationController
     before_action :set_condition_item_type, only: [:new, :edit, :create, :update, :index]
     before_action :check_auth, except: [:index, :show, :new, :create]
 
+    rescue_from ActiveSupport::MessageVerifier::InvalidSignature, with: :too_many_bad_images
+
     def index
         @count = EquipmentListing.count
         if params[:item_type_id]
@@ -58,6 +60,14 @@ class EquipmentListingsController < ApplicationController
     end
     
     private
+
+    def too_many_bad_images
+        if params[:action] == "create"
+            redirect_to new_equipment_listing_path, alert: "Too many images"
+        elsif params[:action] == "update"
+            redirect_to edit_equipment_listing_path, alert: "Too many images"
+        end
+    end
 
     def check_auth
         authorize @equipment_listing
