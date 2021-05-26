@@ -1,94 +1,108 @@
-
+<div class='container m-5'>
+    <div class='row gy-5 gx-5'>
+        <div class='col-md-6'>
             <!-- Swiper -->
-            <div class="swiper-container mySwiper">
+            <div class="swiper-container mySwiper p-4 ">
                 <div class="swiper-wrapper">
-                    <% @equipment_listing.photos.each do |photo| %>
-                    <div class="swiper-slide">
-                        <%= cl_image_tag photo.key, crop: :scale, width: 500, cloud_name: 'boggyboi' %>
-                    </div>
+                    <% if !@equipment_listing.photos.attached? %>
+                        <%= image_tag("http://via.placeholder.com/50", width: '100%', height: "100%")  %>
+                    <% else %>
+                        <% @equipment_listing.photos.each do |photo| %>
+                            <div class="swiper-slide">
+                                <%= cl_image_tag photo.key, crop: :scale, width: 400, cloud_name: 'boggyboi' %>
+                            </div>
+                        <% end %>
                     <% end %>
                 </div>
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
                 <div class="swiper-pagination"></div>
             </div>
-        <h2><%= @equipment_listing.title %></h2>
-        <h3>Owner: <%= @equipment_listing.user.name %> </h3>
-        <p>Category: <%= @equipment_listing.item_type.name %> </p>
-        <p>Condition: <%= @equipment_listing.condition.name %> </p>
-        <p>Description: <%= @equipment_listing.description %> </p>
-        <p>Price: <%= @equipment_listing.price %> </p>
-        <p>Location: <%= @equipment_listing.address %> </p>
-        <p>
-        <%= link_to "Back", equipment_listings_path %>
-        |
-        <%= link_to "Edit", edit_equipment_listing_path if policy(@equipment_listing).edit? %>
-        |
-        <%= link_to "Delete", @equipment_listing, method: :delete, data: {confirm: "Are you sure" } if policy(@equipment_listing).destroy? %>
-        </p>
-        <%= link_to "Message Owner", new_conversation_path %>
-        
+        </div>
+        <div class='col-md-6 border d-flex flex-column justify-content-evenly align-items-evenly'>
+            <div class='row'>
+                <h2><%= @equipment_listing.title %></h2>
+                <p>Description: <%= @equipment_listing.description %> </p>
+            </div>
+            <div class='row'>
+                <div class='col'>
+                    <h2>Price: <%= @equipment_listing.price %> </h2>
+                    <p>Owner: <%= @equipment_listing.user.name %> </p>
+                    <p>Location: <%= @equipment_listing.address %> </p>
+                    <p>Condition: <%= @equipment_listing.condition.name %> </p>
+                    <p>Category: <%= @equipment_listing.item_type.name %> </p>
+                </div>
+                <div class='col d-flex flex-column justify-content-evenly'>
+                <%= link_to "Message Owner", new_conversation_path, class: 'btn btn-primary my-2' %>
+                <p class='d-flex justify-content-evenly'>
+                <%= link_to "Back", equipment_listings_path, class: 'btn btn-primary my-2' %>
+                <%= link_to "Edit", edit_equipment_listing_path, class: 'btn btn-primary my-2' if policy(@equipment_listing).edit? %>
+                <%= link_to "Delete", @equipment_listing, class: 'btn btn-primary my-2', method: :delete, data: {confirm: "Are you sure" } if policy(@equipment_listing).destroy? %>
+                </p>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 
 
+<style>
+    .swiper-container {
+    width: 90%;
+    height: 90%;
+    }
 
-    <style>
-      .swiper-container {
-        width: 40%;
-        height: 40%;
-      }
+    .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
 
-      .swiper-slide {
-        text-align: center;
-        font-size: 18px;
-        background: #fff;
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    }
 
-        /* Center slide text vertically */
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: -webkit-flex;
-        display: flex;
-        -webkit-box-pack: center;
-        -ms-flex-pack: center;
-        -webkit-justify-content: center;
-        justify-content: center;
-        -webkit-box-align: center;
-        -ms-flex-align: center;
-        -webkit-align-items: center;
-        align-items: center;
-      }
+    .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    }
 
-      .swiper-slide img {
-        display: block;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
+    .swiper-container {
+    margin-left: auto;
+    margin-right: auto;
+    }
+</style>
 
-      .swiper-container {
-        margin-left: auto;
-        margin-right: auto;
-      }
-    </style>
+<!-- Swiper JS -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
-    <!-- Swiper JS -->
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-
-    <!-- Initialize Swiper -->
-    <script>
-      var swiper = new Swiper(".mySwiper", {
-        slidesPerView: 1,
-        spaceBetween: 30,
-        loop: true,
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true,
-        },
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        },
-      });
-    </script>
+<!-- Initialize Swiper -->
+<script>
+    var swiper = new Swiper(".mySwiper", {
+    slidesPerView: 1,
+    spaceBetween: 30,
+    loop: true,
+    pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+    },
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+    },
+    });
+</script>
 
 

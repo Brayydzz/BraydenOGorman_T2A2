@@ -1,10 +1,11 @@
-<div class='container'>
+<div class='container m-5'>
     <div class='row'>
         <div class='col'>
-            <p><%= link_to "Create New Listing", new_equipment_listing_path, class: "btn btn-primary"%>
+            <p>
             <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvas" role="button" aria-controls="offcanvas">
                 Categories
             </a>
+            <%= link_to "Create New Listing", new_equipment_listing_path, class: "btn btn-primary"%>
             </p>
             <p><%= paginate @equipment_listings %></p>
             <% if params[:item_type_id] %>
