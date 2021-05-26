@@ -24,3 +24,4 @@ shoes = ItemType.create(name: "Shoes")
 
 cond_used = Condition.create(name: 'Used')
 cond_new = Condition.create(name: "New")
+

@@ -22,8 +22,3 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
-
-
-FEATURES IN DEVELOPMENT (ABOVE MVP)
-
-REMOVING IMAGES

@@ -9,15 +9,14 @@ class EquipmentListingsController < ApplicationController
     def index
         @count = EquipmentListing.count
         if params[:item_type_id]
-            @equipment_listings = EquipmentListing.where(item_type_id: params[:item_type_id]).order(:created_at).page(params[:page])
+            @equipment_listings = EquipmentListing.where(item_type_id: params[:item_type_id]).order(created_at: :desc).page(params[:page])
             @category = ItemType.where(id: params[:item_type_id])
         else
-            @equipment_listings = EquipmentListing.order(:created_at).page(params[:page])
+            @equipment_listings = EquipmentListing.order(created_at: :desc).page(params[:page])
         end
     end
 
     def show
-
         session[:listing_id] = @equipment_listing.user.id
     end
 

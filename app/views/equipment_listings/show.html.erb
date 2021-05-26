@@ -14,9 +14,11 @@
                         <% end %>
                     <% end %>
                 </div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-pagination"></div>   
+                <% if @equipment_listing.photos.count >= 2 %>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-pagination"></div>   
+                <% end %>
             </div>
         </div>
         <div class='col-md-6 border d-flex flex-column justify-content-evenly align-items-evenly'>
@@ -33,8 +35,10 @@
                     <p>Category: <%= @equipment_listing.item_type.name %> </p>
                 </div>
                 <div class='col d-flex flex-column justify-content-evenly'>
-                <% if current_user.id != @equipment_listing.user_id %>
+                <% if user_signed_in? == false || current_user.id != @equipment_listing.user_id  %>
                     <%= link_to "Message Owner", new_conversation_path, class: 'btn btn-primary my-2' %>
+                    <% else %>
+
                 <% end %>
                 <p class='d-flex justify-content-evenly'>
                 <%= link_to "Back", equipment_listings_path, class: 'btn btn-primary my-2' %>
