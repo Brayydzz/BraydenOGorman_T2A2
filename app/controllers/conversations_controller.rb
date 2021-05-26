@@ -16,7 +16,7 @@ class ConversationsController < ApplicationController
 
     def create 
         recipient = User.find(params[:user_id])
-        receipt = current_user.send_message(recipient, params[:body], params[:subject])
+        receipt = current_user.send_message(recipient, get_body, get_subject)
         redirect_to conversation_path(receipt.conversation)
     end
 
@@ -27,6 +27,15 @@ class ConversationsController < ApplicationController
 
 
     private
+
+    def get_body
+        params.require(:body)
+    end
+
+
+    def get_subject 
+        params.require(:subject)
+    end
 
     def set_conversation
         @conversation = current_user.mailbox.conversations.find(params[:id])

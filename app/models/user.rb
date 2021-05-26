@@ -9,6 +9,8 @@ class User < ApplicationRecord
 
   acts_as_messageable
 
+  before_destroy { messages.destroy_all }
+
   # Creates a default role when a user signs up
   after_create :default_role
 

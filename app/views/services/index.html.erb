@@ -1,29 +1,39 @@
-<h1> Show Services </h1>
-
-<p> <%= link_to "Create Service Listing", new_service_path %> </p>
-<%= paginate @services %>
-<div>
-    <table>
-        <tr>
-            <th>Listing Owner</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Price</th>
-            <th>Location</th>
-        </tr>
-        <% @services.each do |service| %>
-            <tr>
-                <td><%= service.user.name %></td>
-                <td> <%= link_to service.title, service_path(service)%> </td>
-                <td><%= service.description %></td>
-                <td> $<%= service.price %> </td>
-                <td> <%= service.location %> </td>
-                <td>    
-                    <%= link_to "Edit", edit_service_path(service) if policy(service).edit? %>
-                |
-                    <%= link_to "Delete", service, method: :delete, data: {confirm: "Are you sure" } if policy(service).destroy?  %>
-                </td>
-            </tr>
-        <% end %>
-    </table>
+<div class='container p-1'>
+    <div class='row'>
+        <div class='col'>
+            <p> <%= link_to "Create Service Listing", new_service_path, class: "btn btn-primary"%> </p>
+            <p><%= paginate @services %></p>
+            <% @services.each do |service| %>
+            <div class='card mb-3 border-dark'>
+                <div class='row g-0'>
+                    <div class='col-md-3 d-flex p-2'>
+                        <div>
+                            <% if !service.photo.attached? %>
+                                <%= image_tag("http://via.placeholder.com/50", width: 175, height: 175, class: 'rounded d-flex image-fluid')%>
+                            <% else %>
+                                <%= cl_image_tag service.photo.key, crop: :scale, width: 175, height: 175, cloud_name: 'boggyboi', class: 'rounded image-fluid'%>
+                            <% end %>
+                        </div>
+                    </div>
+                    <div class='col-md-7 d-flex'>
+                        <div class='card-body d-flex flex-column justify-content-evenly'>
+                            <h4 class="card-title"> <%= link_to service.title, service_path(service)%> </h4>
+                            <p class="card-text"><%= service.description %></p>
+                        </div>
+                    </div>
+                    <div class='col-md-2 d-flex flex-column justify-content-evenly'>
+                        <p><%= service.user.name %></p>
+                        <p> $<%= service.price %> </p>
+                        <p> <%= service.location %> </p>
+                        <p>
+                            <%= link_to "Edit", edit_service_path(service) if policy(service).edit? %>
+                        |
+                            <%= link_to "Delete", service, method: :delete, data: {confirm: "Are you sure" } if policy(service).destroy?  %>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <% end %>
+        </div>
+    </div>
 </div>
