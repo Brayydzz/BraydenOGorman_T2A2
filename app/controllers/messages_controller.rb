@@ -3,15 +3,20 @@ class MessagesController < ApplicationController
     before_action :set_conversation
 
     def create
-        receipt = current_user.reply_to_conversation(@conversation, message_params)
-        redirect_to conversation_path(receipt.conversation)
+        if message_params[:body].empty?
+            flash[:alert] = "You cannot send an empty message"
+            redirect_to conversation_path(@conversation)
+        else
+            receipt = current_user.reply_to_conversation(@conversation, message_params)
+            redirect_to conversation_path(receipt.conversation)
+        end
     end
 
 
     private
 
     def message_params
-        params.require(:body)
+        params.permit(:body)
     end
 
     def set_conversation

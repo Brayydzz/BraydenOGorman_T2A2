@@ -16,8 +16,13 @@ class ConversationsController < ApplicationController
 
     def create 
         recipient = User.find(params[:user_id])
-        receipt = current_user.send_message(recipient, get_body, get_subject)
-        redirect_to conversation_path(receipt.conversation)
+        if get_body[:body].empty? || get_subject[:subject].empty?
+            flash[:alert] = "You cannot send an empty message"
+            redirect_to new_conversation_path
+        else
+            receipt = current_user.send_message(recipient, get_body, get_subject)
+            redirect_to conversation_path(receipt.conversation)
+        end
     end
 
     def destroy 
@@ -29,12 +34,12 @@ class ConversationsController < ApplicationController
     private
 
     def get_body
-        params.require(:body)
+        params.permit(:body)
     end
 
 
     def get_subject 
-        params.require(:subject)
+        params.permit(:subject)
     end
 
     def set_conversation

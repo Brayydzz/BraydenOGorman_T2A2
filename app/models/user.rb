@@ -6,6 +6,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  validates :name, presence: true
+  validates :phone, length: { maximum: 12 }
 
   acts_as_messageable
 
