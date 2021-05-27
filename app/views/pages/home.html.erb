@@ -23,11 +23,11 @@
             <div class='row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-4  g-3'>
                 <% @equipment_listings[0..3].each do |listing| %>
                 <div class='col'>
-                    <div class='card shadow-sm'>
+                    <div class='card shadow-sm text-center'>
                         <% if !listing.photos.attached? %>
                             <%= image_tag("http://via.placeholder.com/50", width: '100%', height: "100%")  %>
                         <% else %>
-                            <%= cl_image_tag listing.photos.first.key, crop: :fill, width: 300, cloud_name: 'boggyboi', class: 'rounded img-fluid img-thumbnail'%>
+                            <%= cl_image_tag listing.photos.first.key, crop: :fill, cloud_name: 'boggyboi', class: 'rounded img-fluid d-flex justify-content-center'%>
                         <% end %>
                         <h4> <%= link_to listing.title, equipment_listing_path(listing) %> </h4>
                         <h6>Price: $<%= listing.price %> </h6>

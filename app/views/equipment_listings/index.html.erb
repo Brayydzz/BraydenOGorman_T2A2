@@ -1,5 +1,5 @@
-<div class='container p-1'>
-    <div class='row'>
+<div class='container'>
+    <div class='row p-1'>
         <div class='col'>
             <p>
             <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvas" role="button" aria-controls="offcanvas">
@@ -19,8 +19,8 @@
             <% end %>
                 <% @equipment_listings.each do |listing| %>
                 <div class="card mb-3 border-dark ">
-                    <div class='row g-0'>
-                        <div class='col-md-3 d-flex p-2'>
+                    <div class='row g-0 text-center'>
+                        <div class='col-md-3 d-flex justify-content-center p-1'>
                             <div>
                                 <% if !listing.photos.attached? %>
                                     <%= image_tag("http://via.placeholder.com/50", width: 175, height: 175, class: 'rounded d-flex image-fluid')%>
