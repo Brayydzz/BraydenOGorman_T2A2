@@ -4,7 +4,7 @@ class ServicesController < ApplicationController
     before_action :check_auth, except: [:index, :show, :new, :create]
 
     def index 
-        @services = Service.order(:created_at).page(params[:page])
+        @services = Service.order(created_at: :desc).page(params[:page])
     end
 
     def show 
