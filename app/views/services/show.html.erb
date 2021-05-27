@@ -1,20 +1,38 @@
-<h1>Show Service</h1>
+<div class='container'>
+    <div class='row p-1 d-flex justify-content-center'>
+        <div class='col-md-6 border d-flex flex-column justify-content-center align-items-center'>
 
-<h2> <%= @service.title  %></h2>
-<p><%= @service.user.name %></p>
-<p><%= @service.description %></p>
-<p> $<%= @service.price %> </p>
-<p> <%= @service.location %> </p>
+        <% if !@service.photo.attached? %>
+            <%= image_tag("http://via.placeholder.com/50", width: 150, height: 150)  %>
+        <% else %>
+                <div>
+                    <%= cl_image_tag @service.photo.key, crop: :scale, width: 150, cloud_name: 'boggyboi' %>
+                </div>
+        <% end %>
 
-<p> <%= cl_image_tag @service.photo.key, crop: :scale, width: 150, cloud_name: 'boggyboi' %> </p>
-
-<p> 
-    <%= link_to "Back", services_path %> 
-    <%= link_to "Edit", edit_service_path if policy(@service).edit? %>
-    <%= link_to "Delete", @service, method: :delete, data: {confirm: "Are you sure?"} if policy(@service).destroy? %>
-</p>
-
-<% if user_signed_in? == false || current_user.id != @service.user_id  %>
-    <%= link_to "Message Owner", new_conversation_path, class: 'btn btn-primary my-2' %>
-    <% else %>
-<% end %>
+            <div class='row'>
+                <h2> <%= @service.title  %></h2>
+                <p><%= @service.description %></p>
+            </div>
+            <div class='row'>
+                <div class='col'>
+                    <h2>Price: $<%= @service.price %> </h2>
+                    <p>Owner: <%= @service.user.name %></p>
+                    <p>Location: <%= @service.location %> </p>
+                </div>
+                    <div class='col d-flex flex-column justify-content-evenly'>
+                        <% if user_signed_in? == false || current_user.id != @service.user_id  %>
+                            <%= link_to "Message Owner", new_conversation_path, class: 'btn btn-primary my-2' %>
+                            <% else %>
+                        <% end %>
+                        <p class='d-flex justify-content-evenly'>
+                            <%= link_to "Back", services_path, class: 'btn btn-primary my-2' %>
+                            <%= link_to "Edit", edit_service_path, class: 'btn btn-primary my-2' if policy(@service).edit? %>
+                            <%= link_to "Delete", @service, class: 'btn btn-primary my-2', method: :delete, data: {confirm: "Are you sure?"} if policy(@service).destroy? %>
+                        </p>
+                    </div>
+            </div>
+    
+        </div>
+    </div>
+</div>

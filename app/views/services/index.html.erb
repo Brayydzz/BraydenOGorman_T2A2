@@ -27,7 +27,6 @@
                         <p> <%= service.location %> </p>
                         <p>
                             <%= link_to "Edit", edit_service_path(service) if policy(service).edit? %>
-                        |
                             <%= link_to "Delete", service, method: :delete, data: {confirm: "Are you sure" } if policy(service).destroy?  %>
                         </p>
                     </div>
