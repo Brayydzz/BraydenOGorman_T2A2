@@ -17,7 +17,7 @@ class EquipmentListingPolicy < ApplicationPolicy
   end
 
   def update?
-    user_is_owner_of_record?
+    user_is_owner_of_record? || (user && user.has_role?(:admin))
   end
 
   def destroy? 
