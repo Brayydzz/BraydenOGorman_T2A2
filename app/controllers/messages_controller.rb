@@ -3,6 +3,7 @@ class MessagesController < ApplicationController
     before_action :set_conversation
 
     def create
+        # Provides validation when a user tries to send a message with empty fields
         if message_params[:body].empty?
             flash[:alert] = "You cannot send an empty message"
             redirect_to conversation_path(@conversation)
@@ -15,11 +16,12 @@ class MessagesController < ApplicationController
 
 
     private
-
+    # Sanitizes input for the body of a message
     def message_params
         params.permit(:body)
     end
 
+    # Sets the current conversation for each action assigned by before_action helper for user to view
     def set_conversation
         @conversation = current_user.mailbox.conversations.find(params[:conversation_id])
     end

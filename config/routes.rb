@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     resources :messages
   end
   resources :users, only: :index
+
+  #Allows me to sort listings via category by using the Item_type ID in params
   resources :item_types, only: :index do
     resources :equipment_listings, only: :index
   end

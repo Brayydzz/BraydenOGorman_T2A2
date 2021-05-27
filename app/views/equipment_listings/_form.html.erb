@@ -59,7 +59,6 @@
             image.remove()
         }
     </script>
-    <%# if page is "new" render 1 button else render all buttons %>
         <%= f.input :photos, :input_html => { :multiple => true }, hint: "Upload Limit: 5" %>
         <% if @equipment_listing.photos.blobs != [] %>
             <% @equipment_listing.photos.each_with_index do |photo, index| %>

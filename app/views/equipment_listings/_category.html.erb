@@ -4,10 +4,10 @@
             <%= link_to type.name, [type, :equipment_listings], class: 'nav-link'%>
         </li>
         <% if index == @item_type.length - 1%>
-        <hr>
-        <li >
-            <%= link_to "Show All", equipment_listings_path, class: 'nav-link' %>
-        </li>
+            <hr>
+            <li >
+                <%= link_to "Show All", equipment_listings_path, class: 'nav-link' %>
+            </li>
         <% end %>
     </ul>
 <% end %>
