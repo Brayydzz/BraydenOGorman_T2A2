@@ -4,6 +4,7 @@ class ServicesController < ApplicationController
     before_action :check_auth, except: [:index, :show, :new, :create]
 
     def index 
+        # Stores all service listings in descending order of time created. .page allows pagination through kaminari gem
         @services = Service.order(created_at: :desc).page(params[:page])
     end
 

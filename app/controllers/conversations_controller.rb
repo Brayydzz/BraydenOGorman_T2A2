@@ -3,6 +3,7 @@ class ConversationsController < ApplicationController
     before_action :set_conversation, only: [:update, :show, :destroy, :edit]
 
     def index 
+        
         @conversations = current_user.mailbox.conversations.page(params[:page]).per(5)
         session[:listing_id] = nil
     end

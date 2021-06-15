@@ -12,6 +12,7 @@ class EquipmentListingsController < ApplicationController
 
         # If the user selects a category via the '_category' form this will change the params to show the item_type_id. 
         # If the params have the Item type in them it will show all listings with the corrosponding item_type_Id, otherwise show all listings
+        # .page allows pagination through kaminari gem
         if params[:item_type_id]
             @equipment_listings = EquipmentListing.where(item_type_id: params[:item_type_id]).order(created_at: :desc).page(params[:page])
 
